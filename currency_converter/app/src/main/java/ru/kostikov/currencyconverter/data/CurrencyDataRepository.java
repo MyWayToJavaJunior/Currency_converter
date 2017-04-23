@@ -18,6 +18,9 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class CurrencyDataRepository implements CurrencyDataSource, CurrencyDataResponse {
 
+
+    private static CurrencyDataRepository INSTANCE = null;
+
     /**
      *  Default convert data from xml
      */
@@ -31,7 +34,25 @@ public class CurrencyDataRepository implements CurrencyDataSource, CurrencyDataR
     * */
     private CurrencyDataResponse mCurrencyDataResponse;
 
-    public CurrencyDataRepository(LoaderManager loaderManager) {
+    /**
+     * Flag indicate downloading already was
+     */
+    private boolean mDownloadFlag = false;
+
+    /**
+     * Returns the single instance of this class, creating it if necessary.
+     *
+     * @param loaderManager
+     * @return the {@link CurrencyDataRepository} instance
+     */
+    public static CurrencyDataRepository getInstance(LoaderManager loaderManager) {
+        if (INSTANCE == null) {
+            INSTANCE = new CurrencyDataRepository(loaderManager);
+        }
+        return INSTANCE;
+    }
+
+    private CurrencyDataRepository(LoaderManager loaderManager) {
 
         mDefaultCurrencyData = new LocalCurrencyData();
         mRemoteCurrencyData = new RemoteCurrencyData(loaderManager);
@@ -51,9 +72,11 @@ public class CurrencyDataRepository implements CurrencyDataSource, CurrencyDataR
     public void requestCurrencyDataMap() {
         HashMap<String, CurrencyData> result = null;
 
-        if (isConnectAvailable()){
+        if (isConnectAvailable() && !mDownloadFlag){
             mRemoteCurrencyData.setCurrencyDataResponse(this);
             mRemoteCurrencyData.requestCurrencyDataMap();
+
+            mDownloadFlag = true;
         }
         mDefaultCurrencyData.setCurrencyDataResponse(this);
         mDefaultCurrencyData.requestCurrencyDataMap();

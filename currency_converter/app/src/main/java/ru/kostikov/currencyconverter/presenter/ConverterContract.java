@@ -10,10 +10,22 @@ import ru.kostikov.currencyconverter.BaseView;
 public interface ConverterContract {
 
     interface View extends BaseView<Presenter> {
+        void setCurrencyFrom(String charNum);
+        void setCurrencyTo(String charNum);
 
+        void setQuantityFrom(String quantityFrom);
+        void setResultTo(String resultTo);
     }
 
     interface Presenter extends BasePresenter {
 
+        void setCurrencyFrom(String charNum);
+        void setCurrencyTo(String charNum);
+
+        void flipCurrency();
+
+        void setNumber(int number);
+        void setDot();
+        void clear();
     }
 }

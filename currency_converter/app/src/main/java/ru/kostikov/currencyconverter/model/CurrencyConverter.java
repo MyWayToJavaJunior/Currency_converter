@@ -17,11 +17,11 @@ public class CurrencyConverter {
     /**
      *  CharNum of currency that converts
      */
-    private String currencyFrom;
+    private String currencyFrom = "RUB";
     /**
      *  CharNum of currency into which converts
      */
-    private String currencyTo;
+    private String currencyTo = "USD";
 
     /**
      * Sets map with data about currencies
@@ -73,7 +73,7 @@ public class CurrencyConverter {
     }
 
     /**
-     * Convert curruncies
+     * Convert currencies
      * @param quantity Quantity of currency FROM
      * @return Quantity in currency TO
      */
@@ -92,7 +92,8 @@ public class CurrencyConverter {
      */
     public void flip(){
         String tmp = this.currencyFrom;
-        this.currencyTo = this.currencyFrom;
         this.currencyFrom = this.currencyTo;
+        this.currencyTo = tmp;
+
     }
 }

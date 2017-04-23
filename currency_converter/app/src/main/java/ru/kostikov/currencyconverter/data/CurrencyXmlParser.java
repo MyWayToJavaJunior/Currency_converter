@@ -50,11 +50,12 @@ public class CurrencyXmlParser {
                         if (currentTag.equals(NUM_CODE)){
                             numCode = Integer.valueOf(parser.getText());
                         } else if (currentTag.equals(CHAR_CODE)){
-                            charCode = new String (parser.getText().getBytes(parser.getInputEncoding()), "UTF-8");
+                            charCode = parser.getText();//new String (parser.getText().getBytes(parser.getInputEncoding()), "UTF-8");
                         } else if (currentTag.equals(NOMINAL)){
                             nominal = Integer.valueOf(parser.getText());
                         } else if (currentTag.equals(NAME)){
-                            name = new String (parser.getText().getBytes(parser.getInputEncoding()), "UTF-8");
+                            String st = new String (parser.getText().getBytes("cp1251"), "UTF-8");
+                            name = parser.getText();//new String (parser.getText().getBytes(parser.getInputEncoding()), "UTF-8");
                         } else if (currentTag.equals(VALUE)){
                             String str = parser.getText().replace(',', '.');
                             value = Float.valueOf(str);
@@ -77,7 +78,7 @@ public class CurrencyXmlParser {
             }
 
             // Костыль
-            dataMap.put("RUS", new CurrencyData(643, 1, 1, "RUB", "Российский рубль"));
+            dataMap.put("RUB", new CurrencyData(643, 1, 1, "RUB", "Российский рубль"));
         }
 
 

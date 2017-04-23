@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager(), converterFragment, R.id.frame_content);
 
             mConverterPresenter = new ConverterPresenter(
-                    new CurrencyDataRepository(getSupportLoaderManager()),
+                    CurrencyDataRepository.getInstance(getSupportLoaderManager()),
                     converterFragment
             );
         }

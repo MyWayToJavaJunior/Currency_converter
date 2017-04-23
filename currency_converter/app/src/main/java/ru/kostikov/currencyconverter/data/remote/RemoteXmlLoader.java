@@ -39,7 +39,7 @@ public class RemoteXmlLoader extends AsyncTaskLoader<String> {
         BufferedReader br = null;
         try {
             HttpURLConnection conn = (HttpURLConnection)(new URL(url)).openConnection();
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "cp1251"));
 
             String line;
             final StringBuilder sb = new StringBuilder();

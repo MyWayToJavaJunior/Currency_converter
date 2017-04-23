@@ -16,10 +16,16 @@
 
 package ru.kostikov.currencyconverter.util;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.ImageView;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This provides methods to help Activities load their UI.
@@ -36,5 +42,19 @@ public class ActivityUtils {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(frameId, fragment);
         transaction.commit();
+    }
+
+    public static void loadImageFromAsset(Context context, ImageView image, String fileName) {
+        try {
+            // получаем входной поток
+            InputStream ims = context.getAssets().open(fileName);
+            // загружаем как Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // выводим картинку в ImageView
+            image.setImageDrawable(d);
+        }
+        catch(IOException ex) {
+            return;
+        }
     }
 }

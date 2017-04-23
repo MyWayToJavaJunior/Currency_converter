@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import ru.kostikov.currencyconverter.data.Constants;
@@ -106,8 +107,6 @@ public class RemoteCurrencyData implements CurrencyDataSource, LoaderManager.Loa
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-
     }
 
     /**
