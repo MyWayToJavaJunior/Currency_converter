@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 import java.util.HashMap;
 
@@ -40,7 +41,6 @@ public class ConverterPresenter implements ConverterContract.Presenter, Currency
 
         mCurrencyRepository = currencyDataRepository;
         mConverterView = converterView;
-
         mConverterView.setPresenter(this);
     }
 
